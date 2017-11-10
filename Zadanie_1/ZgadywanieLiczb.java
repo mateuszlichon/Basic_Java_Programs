@@ -30,7 +30,7 @@ public class ZgadywanieLiczb {
 		} catch (Exception e) {
 			System.out.println("To nie jest liczba. Spróbuj ponownie");
 			//numberInput();
-			throw e;
+			numberGeneratorGame();;
 		}
 
 	}
