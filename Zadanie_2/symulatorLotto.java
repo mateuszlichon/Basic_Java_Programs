@@ -1,6 +1,7 @@
 package Zadanie_2;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -15,25 +16,31 @@ public class symulatorLotto {
 		Scanner input = new Scanner(System.in);
 		int[] number = new int[6];
 		System.out.println("Wprowadź 6 liczb pomiędzy 1 a 49");
-		for (int i = 0; i < 6; i++) {
-			System.out.println("Wybierz " + (i + 1) + " liczbę");
-			int choice = input.nextInt();
-			while (!((choice > 0) && (choice < 50)) || (choice == number[0] || choice == number[1]
-					|| choice == number[2] || choice == number[3] || choice == number[4] || choice == number[5])) {
-				if ((choice > 0) && (choice < 50)) {
-					System.out.println("Już wybrałeś tę liczbę. Spróbuj z inną.");
-				} else {
-					System.out.println("liczba musi być pomiędzy 1 a 49");
+		try {
+			for (int i = 0; i < 6; i++) {
+				System.out.println("Wybierz " + (i + 1) + " liczbę");
+				int choice = input.nextInt();
+				while (!((choice > 0) && (choice < 50)) || (choice == number[0] || choice == number[1]
+						|| choice == number[2] || choice == number[3] || choice == number[4] || choice == number[5])) {
+					if ((choice > 0) && (choice < 50)) {
+						System.out.println("Już wybrałeś tę liczbę. Spróbuj z inną.");
+					} else {
+						System.out.println("liczba musi być pomiędzy 1 a 49");
+					}
+					choice = input.nextInt();
 				}
-				choice = input.nextInt();
+				number[i] = choice;
 			}
-			number[i] = choice;
+			Arrays.sort(number);
+			System.out.println("-----------------------------------");
+			System.out.println("Twoje liczby to " + Arrays.toString(number));
+			System.out.println();
+			input.close();
+			return number;
+		} catch (InputMismatchException e) {
+			System.out.println("To nie jest liczba");
+			playerNumbers();
 		}
-		Arrays.sort(number);
-		System.out.println("-----------------------------------");
-		System.out.println("Twoje liczby to " + Arrays.toString(number));
-		System.out.println();
-		input.close();
 		return number;
 	}
 
